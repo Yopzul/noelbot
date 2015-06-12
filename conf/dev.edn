@@ -1,0 +1,17 @@
+{:irc {:server "irc.rizon.net"
+       :port 6667
+       :chan "#soranowoto-dev"
+       :username "Noelbot-dev"}
+
+ :comm {:no-query ["That's fascinating, %s"
+                   "What do you mean?"
+                   "Yeah I know the feeling"
+                   "I ask myself the same question every day %s"
+                   "Explain further"
+                   "I don't get it"]
+
+        :love-you ["I love you too %s"
+                   "Oh %s please"
+                   "%s~"]
+        :love-you-not ["Sorry I actually love %s"
+                       "Sorry, %s is the one I love"]}}
