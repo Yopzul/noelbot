@@ -3,6 +3,9 @@
        :chan "#soranowoto"
        :username "Noelbot"}
 
+ :db {:address "http://127.0.0.1"
+      :database "noelbot-prod"}
+
  :comm {:no-query ["That's fascinating, %s"
                    "What do you mean?"
                    "Yeah I know the feeling"
@@ -14,4 +17,8 @@
                    "Oh you"
                    "%s~"]
         :love-you-not ["Sorry I actually love %s"
-                       "Sorry, %s is the one I love"]}}
+                       "Sorry, %s is the one I love"]
+
+        :music ["%s, you should listen to %s by %s: %s"]
+        :no-music ["Sorry, I don't know any good music"
+                   "Nah, your pleb-tier taste coudn't handle it"]}}

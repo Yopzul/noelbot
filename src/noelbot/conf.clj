@@ -5,3 +5,4 @@
 
 (def irc (:irc conf))
 (def comm (:comm conf))
+(def db (:db conf))
