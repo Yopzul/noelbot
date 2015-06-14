@@ -1,7 +1,9 @@
 (ns noelbot.noel
   (:require [noelbot.conf :as conf]
             [noelbot.db :as db]
-            [noelbot.util :refer :all]))
+            [noelbot.util :refer :all]
+            [clj-time.core :as t]
+            [clj-time.format :as tf]))
 
 (defn chan-users [irc]
   (keys (get-in @irc [:channels (:chan conf/irc) :users])))
@@ -18,13 +20,16 @@
   (re-find #"(?i)I love you" (:text msg)))
 
 (defn find-music-rec [msg]
-  (and (re-find #"(?i)music" (:text msg))
-       (re-find #"(?i)recommend|give" (:text msg))))
+  (re-find #"(?i)music" (:text msg)))
+
+(defn find-artigas-time [msg]
+  (re-find #"(?i)Artigas time" (:text msg)))
 
 (defn find-personal-query [msg]
-  (cond
-    (find-love msg) (assoc msg :query :love)
-    (find-music-rec msg) (assoc msg :query :music-rec)))
+  (order-queries msg
+    find-love :love
+    find-music-rec :music-req
+    find-artigas-time :artigas-time))
 
 ;; Query answering
 
@@ -45,3 +50,11 @@
             (:artist song)
             (:link song))
     (format-line [:no-music] (:nick query))))
+
+;; uy-offset must be manually updated to compensate the DST
+(defmethod answer-query :artigas-time
+  [_ _]
+  (let [uy-offset -3
+        uy-formatter (tf/with-zone (tf/formatter "HH:mm")
+                                   (t/time-zone-for-offset uy-offset))]
+    (format-line [:artigas-time] (.print uy-formatter (t/now)))))

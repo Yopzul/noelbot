@@ -21,4 +21,6 @@
 
         :music ["%s, you should listen to %s by %s: %s"]
         :no-music ["Sorry, I don't know any good music"
-                   "Nah, your pleb-tier taste coudn't handle it"]}}
+                   "Nah, your pleb-tier taste coudn't handle it"]
+
+        :artigas-time ["Current Artigas time is %s"]}}

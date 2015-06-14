@@ -10,3 +10,10 @@
     (if (re-find #"%s|%d" line)
       (format line fill-in)
       line)))
+
+(defmacro order-queries [msg & body]
+  (let [pairs (partition 2 body)
+        fp (for [[f k] pairs]
+             (list (list f msg) (list assoc msg :query k)))
+        flat-fp (mapcat identity fp)]
+    `(cond ~@flat-fp)))
