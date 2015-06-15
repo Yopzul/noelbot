@@ -19,6 +19,11 @@
         :love-you-not ["Sorry I actually love %s"
                        "Sorry, %s is the one I love"]
 
+        :horror ["NO"
+                 "AAAAAAAAAH"
+                 "I DIDN'T DO ANYTHING"
+                 "I CAN'T %s I CAN'T"]
+
         :music ["%s, you should listen to %s by %s: %s"]
         :no-music ["Sorry, I don't know any good music"
                    "Nah, your pleb-tier taste coudn't handle it"]

@@ -3,7 +3,8 @@
             [noelbot.db :as db]
             [noelbot.util :refer :all]
             [clj-time.core :as t]
-            [clj-time.format :as tf]))
+            [clj-time.format :as tf]
+            [clojure.string :as s]))
 
 (defn chan-users [irc]
   (keys (get-in @irc [:channels (:chan conf/irc) :users])))
@@ -25,11 +26,15 @@
 (defn find-artigas-time [msg]
   (re-find #"(?i)Artigas time" (:text msg)))
 
+(defn find-horror [msg]
+  (re-find #"(?i)Takemikazuchi|witch|kill|murder" (:text msg)))
+
 (defn find-personal-query [msg]
   (order-queries msg
-    find-love :love
-    find-music-rec :music-req
-    find-artigas-time :artigas-time))
+                 find-love :love
+                 find-horror :horror
+                 find-music-rec :music-rec
+                 find-artigas-time :artigas-time))
 
 ;; Query answering
 
@@ -58,3 +63,7 @@
         uy-formatter (tf/with-zone (tf/formatter "HH:mm")
                                    (t/time-zone-for-offset uy-offset))]
     (format-line [:artigas-time] (.print uy-formatter (t/now)))))
+
+(defmethod answer-query :horror
+  [query _]
+  (format-line [:horror] (s/upper-case (:nick query))))

@@ -1,4 +1,4 @@
-(defproject noelbot "0.0.3-SNAPSHOT"
+(defproject noelbot "0.0.4-SNAPSHOT"
   :description "IRC bot successing Chaikabot"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
