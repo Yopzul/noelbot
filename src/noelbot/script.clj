@@ -1,8 +1,7 @@
 (ns noelbot.script
-  (:require [noelbot.conf :as conf]
-            [noelbot.db :as db]
-            [little-couch.core :as couch])
-  (:import (java.util UUID)))
+  (:require [noelbot.db :as db]
+            [clojure.java.io :as io]
+            [little-couch.core :as couch]))
 
 ;; Functions used to set up the environment, notably the database
 
@@ -10,22 +9,32 @@
 (def prod-conf (read-string (slurp "conf/prod.edn")))
 
 (defn create-dbs []
-  (if (:ok (couch/create (couch/db-setup (:db dev-conf))))
-    "Created the dev db" "Failed to create the dev db")
+  (couch/create (couch/db-setup (:db dev-conf)))
   (couch/create (couch/db-setup (:db prod-conf))))
 
-(defn fill-music-rec []
-  (let [songs (read-string (slurp "music_rec.edn"))
-        db (couch/db-setup (:db prod-conf))]
-    (doseq [song songs]
-      (couch/create-doc db
-                        (UUID/randomUUID)
-                        (merge song {:type "music_rec"})))))
+(defn fill-music-rec [database filename]
+  (let [songs (read-string (slurp filename))]
+    (doseq [s songs]
+      (db/add-music-rec database s))))
 
-(defn setup-dbs []
-  (create-dbs)
-  (fill-music-rec))
+(defn fill-sadpanda-rec [database filename]
+  (with-open [f (io/reader filename)]
+    (doseq [line (line-seq f)]
+      (when (re-find #"^http://" line)
+        (db/add-sadpanda-rec database {:link line})))))
+
+(defn setup-prod-db []
+  (let [db (couch/db-setup (:db prod-conf))]
+    (couch/create db)
+    (couch/create-doc db "_design/music_rec"
+                      {:language "javascript"
+                       :views {:random {:map "function(doc){if(doc.type==\"music_rec\"){emit(doc.rand,{artist:doc.artist,title:doc.title,link:doc.link});}}"
+                                        :reduce "_count"}}})
+    (couch/create-doc db "_design/sadpanda_rec"
+                      {:language "javascript"
+                       :views {:random {:map "function(doc){if(doc.type==\"sadpanda_rec\"){emit(doc.rand,{artist:doc.artist,title:doc.title,link:doc.link});}}"
+                                        :reduce "_count"}}})))
 
 ;; Call this function to set everything up
 (defn setup []
-  (setup-dbs))
+  (setup-prod-db))

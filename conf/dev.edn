@@ -1,31 +1,40 @@
-{:irc {:server "irc.rizon.net"
-       :port 6667
-       :chan "#soranowoto-dev"
-       :username "Noelbot-dev"}
+{:irc  {:server   "irc.rizon.net"
+        :port     6667
+        :chan     "#soranowoto-dev"
+        :username "Noelbot-dev"}
 
- :db {:address "http://127.0.0.1"
-      :database "noelbot-dev"}
+ :db   {:address  "http://127.0.0.1"
+        :database "noelbot-dev"}
 
- :comm {:no-query ["That's fascinating, %s"
-                   "What do you mean?"
-                   "Yeah I know the feeling"
-                   "I ask myself the same question every day %s"
-                   "Explain further"
-                   "I don't get it"]
+ :comm {:no-query     ["That's fascinating, %s"
+                       "What do you mean?"
+                       "Yeah I know the feeling"
+                       "I ask myself the same question every day %s"
+                       "Explain further"
+                       "I don't get it"]
 
-        :love-you ["I love you too %s"
-                   "Oh you"
-                   "%s~"]
+        :love-you     ["I love you too %s"
+                       "Oh you"
+                       "%s~"]
         :love-you-not ["Sorry I actually love %s"
                        "Sorry, %s is the one I love"]
 
-        :horror ["NO"
-                 "AAAAAAAAAH"
-                 "I DIDN'T DO ANYTHING"
-                 "I CAN'T %s I CAN'T"]
+        :horror       ["NO"
+                       "AAAAAAAAAH"
+                       "I DIDN'T DO ANYTHING"
+                       "I CAN'T %s I CAN'T"]
 
-        :music ["%s, you should listen to %s by %s: %s"]
-        :no-music ["Sorry, I don't know any good music"
-                   "Nah, your pleb-tier taste coudn't handle it"]
+        :music        ["%s, you should listen to %s by %s: %s"]
+        :no-music     ["Sorry, I don't know any good music"
+                       "Nah, your pleb-tier taste coudn't handle it"]
 
-        :artigas-time ["Current Artigas time is %s"]}}
+        :artigas-time ["Current Artigas time is %s"]
+
+        :sadpanda     ["Yeah, yeah %s"
+                       "Here, you disgusting pig %s"
+                       "Ugh, take that and go do your filthy things somewhere else %s"
+                       "You'll probably like this garbage, you scum %s"
+                       "Gross"
+                       "Eww no!"]
+
+        :db-error     ["I'm too sleepy..."]}}

@@ -29,12 +29,16 @@
 (defn find-horror [msg]
   (re-find #"(?i)Takemikazuchi|witch|kill|murder" (:text msg)))
 
+(defn find-sad-panda [msg]
+  (re-find #"(?i)porn|sad panda" (:text msg)))
+
 (defn find-personal-query [msg]
   (order-queries msg
                  find-love :love
                  find-horror :horror
                  find-music-rec :music-rec
-                 find-artigas-time :artigas-time))
+                 find-artigas-time :artigas-time
+                 find-sad-panda :sadpanda))
 
 ;; Query answering
 
@@ -67,3 +71,9 @@
 (defmethod answer-query :horror
   [query _]
   (format-line [:horror] (s/upper-case (:nick query))))
+
+(defmethod answer-query :sadpanda
+  [_ _]
+  (if-let [link (db/get-sadpanda-rec)]
+    (format-line [:sadpanda] link)
+    (get-line :db-error)))

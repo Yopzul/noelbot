@@ -28,4 +28,13 @@
         :no-music ["Sorry, I don't know any good music"
                    "Nah, your pleb-tier taste coudn't handle it"]
 
-        :artigas-time ["Current Artigas time is %s"]}}
+        :artigas-time ["Current Artigas time is %s"]
+
+        :sadpanda     ["Yeah, yeah %s"
+                       "Here, you disgusting pig %s"
+                       "Ugh, take that and go do your filthy things somewhere else %s"
+                       "You'll probably like this garbage, you scum %s"
+                       "Gross"
+                       "Eww no!"]
+
+        :db-error     ["I'm too sleepy..."]}}
