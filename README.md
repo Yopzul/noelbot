@@ -1,14 +1,20 @@
-# noelbot
+# Noelbot
 
 It's an IRC bot that does stuff.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Compile using Leiningen:
+
+    $ lein uberjar
 
 ## Usage
 
     $ java -jar noelbot-0.1.0-standalone.jar
+
+## Configuration
+
+Configuration are in the config files.
 
 ## Bugs
 
